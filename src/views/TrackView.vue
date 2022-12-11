@@ -7,40 +7,36 @@
       <ol-tile-layer>
         <ol-source-osm />
       </ol-tile-layer>
-
-      <ol-overlay :position="[40, 40]">
-        <template v-slot="slotProps">
-          <div class="overlay-content">
-            Hello world!<br>
-            Position: {{ slotProps.position }}
-          </div>
-        </template>
-      </ol-overlay>
+      <MapMarker />
     </ol-map>
+    <InfoPanel :data="data"/>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
 import { onMounted } from 'vue';
+import { useMainStore } from '@/stores/main';
+import { useRouter } from 'vue-router';
+import InfoPanel from '@/components/InfoPanel.vue'
+import MapMarker from '@/components/MapMarker.vue'
+const router = useRouter()
+
+const mainStore = useMainStore();
 
 const center = ref([40, 40])
 const rotation = ref(0)
 const zoom = ref(8)
 const projection = ref('EPSG:4326')
-
+const data = ref(mainStore.getData)
 onMounted(() => {
-
+  if (!data) {
+    router.push({ path: '/' })
+  }
 })
 </script>
 <style scoped>
-.overlay-content {
-    background: #efefef;
-    box-shadow: 0 5px 10px rgb(2 2 2 / 20%);
-    padding: 10px 20px;
-    font-size: 16px;
-    color: black;
-}
+
 .map-wrap {
   height: 100%;
   width: 100%;
