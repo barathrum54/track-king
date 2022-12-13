@@ -22,6 +22,7 @@ onMounted(() => {
 
 <template>
   <div class="wrapper">
+    
     <div class="content">
       <loading v-model:active="isLoading" :can-cancel="false" :on-cancel="onCancel" :is-full-page="fullPage" />
 
@@ -37,7 +38,11 @@ onMounted(() => {
 
 </template>
 
-<style scoped>
+<style>
+.swal2-confirm{
+  background-color: #3f50b5 !important;
+  color: white;
+}
 .wrapper {
   height: 100vh;
   min-width: 100vw;
@@ -45,6 +50,7 @@ onMounted(() => {
   flex-flow: column;
   justify-content: center;
   align-items: center;
+  background-color: #3f50b5;
 }
 
 .content {
@@ -73,5 +79,9 @@ nav {
 nav a {
   text-decoration: none;
   color: white;
+}
+.icon{
+  width: 20px;
+  height: 20px;
 }
 </style>

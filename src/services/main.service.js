@@ -7,6 +7,7 @@ import { getShipmentDataDemo } from "@/demo/api.js";
 let isDemo = false;
 
 const getShipmentData = async (trackingCode) => {
+    trackingCode = trackingCode.replace(" ", '');
     loading(true);
     if (isDemo) {
         return getShipmentDataDemo(trackingCode);
